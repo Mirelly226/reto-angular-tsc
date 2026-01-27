@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.icon-style {
+  width: 30px;
+  height: 30px;
+  color: #052760;
+  margin-right: 10px;
+  flex-shrink: 0;
+  background-color: transparent;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #052760;
+  margin: 0;
+}

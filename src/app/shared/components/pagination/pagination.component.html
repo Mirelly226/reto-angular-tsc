@@ -1,0 +1,8 @@
+<div class="footer">
+    <div class="results-count">5 Resultados</div>
+    <select class="pagination-select">
+        @for (item of paginationOptions; track item) {
+            <option value="{{ item }}">{{ item }}</option>
+        }
+    </select>
+</div>

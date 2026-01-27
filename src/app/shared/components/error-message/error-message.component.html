@@ -1,0 +1,10 @@
+<div class="error-container">
+  <div class="error-icon">⚠️</div>
+  <p class="error-message">{{ message() }}</p>
+  @if (showRetryButton()) {
+    <app-primary-button 
+      [label]="retryButtonLabel()" 
+      (clicked)="onRetry()" 
+    />
+  }
+</div>

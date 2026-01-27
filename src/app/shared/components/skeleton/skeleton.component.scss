@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+.skeleton-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.loading-text {
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}

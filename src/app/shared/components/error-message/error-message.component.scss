@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: $color-error;
+  font-size: $font-size-base;
+  margin-bottom: 24px;
+}

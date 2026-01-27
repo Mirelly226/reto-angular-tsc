@@ -1,8 +1,12 @@
-<div class="footer">
-    <div class="results-count">5 Resultados</div>
-    <select class="pagination-select">
-        @for (item of paginationOptions; track item) {
-            <option value="{{ item }}">{{ item }}</option>
-        }
-    </select>
+<div class="container">
+  <div class="results-count">{{ totalResults() }} Resultados</div>
+  <select
+    class="pagination-select"
+    [value]="pageSize()"
+    (change)="onPageSizeChange($event)"
+  >
+    @for (option of paginationOptions; track option) {
+      <option [value]="option">{{ option }}</option>
+    }
+  </select>
 </div>

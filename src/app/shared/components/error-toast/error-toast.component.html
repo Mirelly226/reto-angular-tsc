@@ -1,0 +1,6 @@
+@if (errorService.errorMessage(); as message) {
+  <div class="error-toast">
+    <span>{{ message }}</span>
+    <button (click)="errorService.clearError()">✕</button>
+  </div>
+}

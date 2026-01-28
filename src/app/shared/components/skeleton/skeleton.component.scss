@@ -1,13 +1,59 @@
 @use 'variables' as *;
 
-.skeleton-container {
+.skeleton-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.skeleton-row {
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  td {
+    padding: 16px 24px;
+    vertical-align: middle;
+  }
+}
+
+.col-logo {
+  width: 7%;
+}
+
+.col-name {
+  width: 20%;
+}
+
+.col-description {
+  width: 25%;
+}
+
+.col-date {
+  width: 20%;
+}
+
+.col-actions {
+  width: 8%;
+}
+
+.skeleton-box {
+  height: 30px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  width: 95%;
+}
+
+.skeleton-text-container {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 48px;
 }
 
-.loading-text {
+.skeleton-text {
   color: $color-text-muted;
   font-size: $font-size-sm;
 }

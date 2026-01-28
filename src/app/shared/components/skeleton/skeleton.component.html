@@ -1,3 +1,32 @@
-<div class="skeleton-container">
-  <span class="loading-text">Cargando...</span>
-</div>
+@if (type() === 'table') {
+  <table class="skeleton-table">
+    <tbody>
+      @for (row of rowsArray; track row) {
+        <tr class="skeleton-row">
+          <td class="col-logo">
+            <div class="skeleton-box"></div>
+          </td>
+          <td class="col-name">
+            <div class="skeleton-box"></div>
+          </td>
+          <td class="col-description">
+            <div class="skeleton-box"></div>
+          </td>
+          <td class="col-date">
+            <div class="skeleton-box"></div>
+          </td>
+          <td class="col-date">
+            <div class="skeleton-box"></div>
+          </td>
+          <td class="col-actions">
+            <div class="skeleton-box"></div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <div class="skeleton-text-container">
+    <span class="skeleton-text">Cargando...</span>
+  </div>
+}

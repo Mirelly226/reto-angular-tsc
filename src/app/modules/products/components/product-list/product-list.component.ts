@@ -66,10 +66,9 @@ export class ProductListComponent implements OnInit {
         this.products.set(products);
         this.isLoading.set(false);
       },
-      error: (err) => {
+      error: () => {
         this.error.set('Error al cargar los productos. Por favor, intente nuevamente.');
         this.isLoading.set(false);
-        console.error('Error loading products:', err);
       }
     });
   }

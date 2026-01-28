@@ -11,8 +11,6 @@ export class ErrorHandlerService {
     const message = this.getErrorMessage(error);
     this.errorMessage.set(message);
     
-    console.error('HTTP Error:', error);
-    
     setTimeout(() => this.clearError(), 5000);
   }
 

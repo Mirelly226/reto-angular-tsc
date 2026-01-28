@@ -7,7 +7,8 @@ export const PRODUCT_FORM_ERRORS: Record<string, Record<string, string>> = {
   },
   name: {
     required: 'Nombre es requerido!',
-    minlength: 'Mínimo 5 caracteres!',
+    // NOTE: Adjusted to 6 chars to match backend validation (document specifies 5, but backend requires 6)
+    minlength: 'Mínimo 6 caracteres!',
     maxlength: 'Máximo 100 caracteres!'
   },
   description: {

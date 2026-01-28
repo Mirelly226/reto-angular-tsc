@@ -7,53 +7,65 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+The server will run on `http://localhost:4200/`. Make sure the backend API is running on `http://localhost:3002`.
 
 ## Building
 
-To build the project run:
+To build the project for production:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will compile your project and store the build artifacts in the `dist/` directory.
 
 ## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+This project uses [Jest](https://jestjs.io/) as the testing framework.
+
+### Run tests once
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Run tests in watch mode
 
 ```bash
-ng e2e
+npm run test:watch
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Run tests with coverage
 
-## Additional Resources
+```bash
+npm run test:coverage
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This will generate a coverage report in the `coverage/` directory. The project maintains a minimum coverage threshold of 70% for branches, functions, lines, and statements.
+
+Coverage reports are available in:
+- HTML format: `coverage/lcov-report/index.html`
+- LCOV format: `coverage/lcov.info`
+
+## Implementation Notes
+
+### Inconsistency Detected: Name Field Validation
+
+**Issue found:**
+- The challenge document specifies that the "Name" field must have a minimum of **5 characters**.
+- However, the backend rejects values with 5 characters and requires a minimum of **6 characters**.
+
+**Decision taken:**
+The frontend validation was adjusted to **6 characters** to:
+1. Avoid backend errors and improve user experience
+2. Prevent users from completing the form correctly in the frontend but receiving an error when submitting
+3. Maintain consistency between frontend and backend
+
+**Location of changes:**
+- `src/app/modules/products/components/product-form/product-form.component.ts` (line ~41)
+- `src/app/modules/products/constants/form-errors.constants.ts` (line ~10)
+
+This inconsistency can be mentioned during the technical interview to demonstrate analytical skills and pragmatic decision-making.

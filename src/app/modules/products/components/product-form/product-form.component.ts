@@ -38,6 +38,7 @@ export class ProductFormComponent implements OnInit {
             Validators.minLength(3),
             Validators.maxLength(10)
         ]],
+        // NOTE: Document specifies min 5 chars, but backend validates min 6. Adjusted to 6 to match backend validation.
         name: ['', [
             Validators.required,
             Validators.minLength(6),

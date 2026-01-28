@@ -26,8 +26,7 @@ export class ConfirmDeleteProductComponent {
       next: () => {
         this.deleted.emit(this.product().id);
       },
-      error: (err) => {
-        console.error('Error deleting product:', err);
+      error: () => {
         this.cancelled.emit();
       }
     });

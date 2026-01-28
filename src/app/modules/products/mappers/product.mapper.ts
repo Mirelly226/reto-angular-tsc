@@ -8,8 +8,8 @@ export class ProductMapper {
       name: apiProduct.name,
       description: apiProduct.description,
       logo: apiProduct.logo,
-      releaseDate: new Date(apiProduct.date_release),
-      revisionDate: new Date(apiProduct.date_revision),
+      releaseDate: ProductMapper.parseDate(apiProduct.date_release),
+      revisionDate: ProductMapper.parseDate(apiProduct.date_revision),
     };
   }
 
@@ -43,5 +43,10 @@ export class ProductMapper {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  private static parseDate(dateString: string): Date {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day, 12, 0, 0, 0);
   }
 }

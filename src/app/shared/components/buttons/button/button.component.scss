@@ -1,0 +1,40 @@
+@use 'variables' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 32px;
+  border-radius: 4px;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color $transition-fast, border-color $transition-fast;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  border: none;
+  background-color: $color-secondary;
+  color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: #e6c700;
+  }
+}
+
+.btn-secondary {
+  padding: 8px 24px;
+  border: 1px solid $color-border;
+  background-color: $color-table-header;
+  color: $color-text-secondary;
+
+  &:hover:not(:disabled) {
+    background-color: $color-border;
+    border-color: $color-text-secondary;
+  }
+}

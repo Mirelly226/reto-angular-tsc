@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="form-card">
+    <h2 class="form-title">{{ formTitle() }}</h2>
+    
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="id" class="form-label">ID</label>
+          <input
+            type="text"
+            id="id"
+            formControlName="id"
+            class="form-input"
+            [class.input-error]="isFieldInvalid('id')"
+          />
+          @if (isIdValidating) {
+            <span class="validating-text">Verificando...</span>
+          }
+          <app-field-error 
+            [control]="productForm.get('id')" 
+            [messages]="formErrors['id']" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-input"
+            [class.input-error]="isFieldInvalid('name')"
+          />
+          <app-field-error 
+            [control]="productForm.get('name')" 
+            [messages]="formErrors['name']" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description" class="form-label">Descripción</label>
+          <input
+            type="text"
+            id="description"
+            formControlName="description"
+            class="form-input"
+            [class.input-error]="isFieldInvalid('description')"
+          />
+          <app-field-error 
+            [control]="productForm.get('description')" 
+            [messages]="formErrors['description']" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="logo" class="form-label">Logo</label>
+          <input
+            type="text"
+            id="logo"
+            formControlName="logo"
+            class="form-input"
+            [class.input-error]="isFieldInvalid('logo')"
+          />
+          <app-field-error 
+            [control]="productForm.get('logo')" 
+            [messages]="formErrors['logo']" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="releaseDate" class="form-label">Fecha Liberación</label>
+          <input
+            type="date"
+            id="releaseDate"
+            formControlName="releaseDate"
+            class="form-input"
+            [class.input-error]="isFieldInvalid('releaseDate')"
+          />
+          <app-field-error 
+            [control]="productForm.get('releaseDate')" 
+            [messages]="formErrors['releaseDate']" 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="revisionDate" class="form-label">Fecha Revisión</label>
+          <input
+            type="date"
+            id="revisionDate"
+            formControlName="revisionDate"
+            class="form-input readonly"
+          />
+          <app-field-error 
+            [control]="productForm.get('revisionDate')" 
+            [messages]="formErrors['revisionDate']" 
+          />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <app-button
+          label="Reiniciar"
+          variant="secondary"
+          type="button"
+          (clicked)="onReset()"
+        />
+        <app-button
+          [label]="isEditMode() ? 'Actualizar' : 'Agregar'"
+          variant="primary"
+          type="submit"
+          [disabled]="isSubmitting() || productForm.invalid"
+        />
+      </div>
+    </form>
+  </div>
+</div>

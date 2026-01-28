@@ -1,22 +1,29 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatePipe, NgTemplateOutlet, UpperCasePipe } from '@angular/common';
 import { SearchBoxComponent } from '../../../../shared/components/search-box/search-box.component';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { SkeletonComponent } from '../../../../shared/components/skeleton/skeleton.component';
-import { PrimaryButtonComponent } from '../../../../shared/components/primary-button/primary-button.component';
-import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { ErrorMessageComponent } from '../../../../shared/components/error-message/error-message.component';
+import { DropdownMenuComponent } from '../../../../shared/components/dropdown-menu/dropdown-menu.component';
+import { IDropdownOption, MenuAction } from '../../../../shared/types/menu.types';
+import { ConfirmDeleteProductComponent } from '../confirm-delete-product/confirm-delete-product.component';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../models/product.model';
+import { MENU_OPTIONS } from '../../../../shared/constants/menu.constants';
 
 @Component({
-  imports: [DatePipe, UpperCasePipe, NgTemplateOutlet, SearchBoxComponent, PaginationComponent, SkeletonComponent, PrimaryButtonComponent, IconButtonComponent, ErrorMessageComponent],
+  imports: [NgTemplateOutlet, DatePipe, UpperCasePipe, SearchBoxComponent, PaginationComponent, SkeletonComponent, ButtonComponent, ErrorMessageComponent, DropdownMenuComponent, ConfirmDeleteProductComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent implements OnInit {
   private readonly productService = inject(ProductService);
+  private readonly router = inject(Router);
+
+  readonly menuOptions: IDropdownOption[] = MENU_OPTIONS;
 
   readonly products = signal<IProduct[]>([]);
   readonly isLoading = signal<boolean>(true);
@@ -24,6 +31,8 @@ export class ProductListComponent implements OnInit {
   readonly searchTerm = signal<string>('');
   readonly pageSize = signal<number>(5);
   readonly currentPage = signal<number>(1);
+  readonly showDeleteModal = signal<boolean>(false);
+  readonly productToDelete = signal<IProduct | null>(null);
 
   readonly filteredProducts = computed(() => {
     const term = this.searchTerm().toLowerCase().trim();
@@ -31,8 +40,7 @@ export class ProductListComponent implements OnInit {
       return this.products();
     }
     return this.products().filter(product =>
-      product.name.toLowerCase().includes(term) ||
-      product.description.toLowerCase().includes(term)
+      product.name.toLowerCase().includes(term)
     );
   });
 
@@ -78,5 +86,32 @@ export class ProductListComponent implements OnInit {
 
   onRetry(): void {
     this.loadProducts();
+  }
+
+  onAddProduct(): void {
+    this.router.navigate(['/products/new']);
+  }
+
+  onProductAction(action: MenuAction, product: IProduct): void {
+    if (action === 'edit') {
+      this.router.navigate(['/products/edit', product.id]);
+    } else if (action === 'delete') {
+      this.productToDelete.set(product);
+      this.showDeleteModal.set(true);
+    }
+  }
+
+  onProductDeleted(productId: string): void {
+    this.products.update(products => products.filter(p => p.id !== productId));
+    this.closeDeleteModal();
+  }
+
+  onDeleteCancelled(): void {
+    this.closeDeleteModal();
+  }
+
+  private closeDeleteModal(): void {
+    this.showDeleteModal.set(false);
+    this.productToDelete.set(null);
   }
 }

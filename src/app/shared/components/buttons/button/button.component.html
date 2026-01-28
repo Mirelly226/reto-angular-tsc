@@ -1,5 +1,6 @@
 <button
-  class="btn-primary"
+  [class]="'btn btn-' + variant()"
+  [type]="type()"
   [disabled]="disabled()"
   (click)="onClick()"
 >

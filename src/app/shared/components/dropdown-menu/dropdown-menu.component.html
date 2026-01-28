@@ -1,0 +1,22 @@
+<div class="dropdown">
+  <app-icon-button
+    icon="⋮"
+    ariaLabel="options"
+    (clicked)="toggle()"
+  />
+  
+  @if (isOpen()) {
+    <div class="dropdown-menu" role="menu">
+      @for (option of options(); track option.action) {
+        <button 
+          type="button"
+          class="dropdown-item"
+          role="menuitem"
+          (click)="selectOption(option.action)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  }
+</div>

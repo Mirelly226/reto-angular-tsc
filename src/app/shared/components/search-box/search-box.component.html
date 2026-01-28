@@ -2,6 +2,7 @@
   <input
     type="text"
     placeholder="Search..."
-    (input)="onInput($event)"
+    #searchInput
+    (input)="onInput(searchInput.value)"
   />
 </div>

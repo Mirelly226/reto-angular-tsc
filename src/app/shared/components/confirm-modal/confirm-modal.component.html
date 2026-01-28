@@ -1,0 +1,18 @@
+<div class="modal-overlay" (click)="onCancel()" (keydown.escape)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()">
+    <p class="modal-message">{{ message() }}</p>
+    
+    <div class="modal-actions">
+      <app-button
+        label="Cancelar"
+        variant="secondary"
+        (clicked)="onCancel()"
+      />
+      <app-button
+        label="Confirmar"
+        variant="primary"
+        (clicked)="onConfirm()"
+      />
+    </div>
+  </div>
+</div>

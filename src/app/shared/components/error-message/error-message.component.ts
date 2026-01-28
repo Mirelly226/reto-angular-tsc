@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { PrimaryButtonComponent } from '../primary-button/primary-button.component';
+import { ButtonComponent } from '../buttons/button/button.component';
 
 @Component({
   selector: 'app-error-message',
-  imports: [PrimaryButtonComponent],
+  imports: [ButtonComponent],
   templateUrl: './error-message.component.html',
   styleUrl: './error-message.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

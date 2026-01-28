@@ -1,7 +1,7 @@
 <div class="container">
   <div class="toolbar">
     <app-search-box (search)="onSearch($event)" />
-    <app-primary-button label="Agregar" />
+    <app-button label="Agregar" variant="primary" (clicked)="onAddProduct()" />
   </div>
 
   <div class="table-container">
@@ -40,7 +40,10 @@
               <td class="col-date">{{ product.releaseDate | date:'dd/MM/yyyy' }}</td>
               <td class="col-date">{{ product.revisionDate | date:'dd/MM/yyyy' }}</td>
               <td class="col-actions">
-                <app-icon-button icon="⋮" aria-label="Opciones" />
+                <app-dropdown-menu 
+                  [options]="menuOptions" 
+                  (optionSelected)="onProductAction($event, product)" 
+                />
               </td>
             </tr>
           } @empty {
@@ -65,21 +68,29 @@
 <ng-template #tableHeader>
   <thead>
     <tr>
-      <th class="col-logo">Logo</th>
-      <th class="col-name">Nombre del producto</th>
-      <th class="col-description">
+      <th scope="col" class="col-logo">Logo</th>
+      <th scope="col" class="col-name">Nombre del producto</th>
+      <th scope="col" class="col-description">
         Descripción
         <span class="info-icon" title="Descripción del producto financiero">i</span>
       </th>
-      <th class="col-date">
+      <th scope="col" class="col-date">
         Fecha de liberación
         <span class="info-icon" title="Fecha en que el producto estará disponible">i</span>
       </th>
-      <th class="col-date">
+      <th scope="col" class="col-date">
         Fecha de revisión
         <span class="info-icon" title="Fecha de revisión de términos y condiciones">i</span>
       </th>
-      <th class="col-actions"></th>
+      <th scope="col" class="col-actions"></th>
     </tr>
   </thead>
 </ng-template>
+
+@if (showDeleteModal() && productToDelete()) {
+  <app-confirm-delete-product
+    [product]="productToDelete()!"
+    (deleted)="onProductDeleted($event)"
+    (cancelled)="onDeleteCancelled()"
+  />
+}
